@@ -1,0 +1,19 @@
+body {
+    background-image: url(firefox.png), url(bubbles.png), linear-gradient(to right, rgb(160, 204, 243), rgba(196, 143, 143, 0.801));
+}
+
+
+
+#main{
+    margin-left: 900px;
+    margin-top: -500px;
+}
+
+#main1{
+    margin-left: 900px;
+    margin-top: 50%px;
+}
+
+#main2{
+    margin-top: -500px;
+}

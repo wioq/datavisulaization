@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECharts Visualization</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/echarts.min.js"></script>
+</head>
+<body>
+
+
+    <div id="chart" style="width: 500px; height: 500px;"></div>
+    <div id="main" style="width: 600px; height: 600px;"></div>
+    <div id="main1" style="width: 700px; height: 500px;"></div>
+
+
+    <div id="main2" style="width: 700px; height: 500px;"></div>
+    <!-- <div id="chart4" style="width: 600px; height: 400px;"></div>
+    <div id="chart5" style="width: 600px; height: 400px;"></div>
+
+    <div id="chart6" style="width: 600px; height: 400px;"></div>
+    <div id="chart7" style="width: 600px; height: 400px;"></div>
+    <div id="chart8" style="width: 600px; height: 400px;"></div>
+
+ -->
+
+
+
+
+    <script>
+        
+      
+
+var chartDom = document.getElementById('chart');
+var myChart = echarts.init(chartDom);
+var option;
+
+option = {
+
+  title: {
+    text: 'Ratio Between Winner Continent',
+  
+    left: 'center'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  legend: {
+    orient: 'vertical',
+    left: 'left',
+    
+  },
+  series: [
+    {
+      name: 'Access From',
+      type: 'pie',
+      radius: '50%',
+      
+      data: [
+        { value: 12, name: 'Europe' },
+        { value: 9, name: 'America ' },
+       
+      ],
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+var chartDom = document.getElementById('main1');
+var myChart = echarts.init(chartDom);
+var option;
+
+option = {
+  title:{
+    text: 'Top Five Hottest Matches',
+    left: '25%',
+    textAlign: 'center'
+  },
+  xAxis: {
+    type: 'category',
+    data: ['Brazil ', 'Germany ', 'Italy ', 'Spain ', 'France '],
+    
+
+    axisLabel: {
+      textStyle: {
+        fontStyle: 'italic', // Set the font style to italic
+      }
+    }
+    },
+  yAxis: {
+    type: 'value',
+    
+    
+  },
+  series: [
+    {
+      data: [3587538,  3386810,  3359439, 3178856, 3031768],
+      type: 'bar',
+      label:{
+        show:true,
+        position:'inside',
+        
+        
+      }
+
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+
+
+
+
+
+
+
+
+
+var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom);
+var option1;
+
+setTimeout(function () {
+  option1 = {
+    legend: {},
+    tooltip: {
+      trigger: 'axis',
+      showContent: false
+    },
+    dataset: {
+      source: [
+        ['Year', '1930', '1934', '1938', '1950','1954',
+        '1958', '1962', '1966', '1970',
+        '1974', '1978', '1982', '1986', '1990', 
+        '1994', '1998', '2002','2006', '2010', '2014', '2018'],
+        ["GoalsScored",70,70,84,88,140,126,89,89,95,97 ,102,146,132,115,141,171,161,147,145,171,169],
+        ["QualifiedTeams",
+,13
+,16
+,15
+,13
+,16
+,16
+,16
+,16
+,16
+,16
+,16
+,24
+,24
+,24
+,24
+,32
+,32
+,32
+,32
+,32
+,32
+,],
+        ["MatchesPlayed",
+        ,18
+        ,17
+        ,18
+        ,22
+        ,26
+        ,35
+        ,32
+        ,32
+        ,32
+        ,38
+        ,38
+        ,52
+        ,52
+        ,52
+        ,52
+        ,64
+        ,64
+        ,64
+        ,64
+        ,64
+        ,64
+        ],
+
+        
+      ]
+    },
+    xAxis: { type: 'category' },
+    yAxis: { gridIndex: 0 },
+    grid: { top: '55%' },
+    series: [
+      {
+        type: 'line',
+        smooth: true,
+        seriesLayoutBy: 'row',
+        emphasis: { focus: 'series' }
+      },
+      {
+        type: 'line',
+        smooth: true,
+        seriesLayoutBy: 'row',
+        emphasis: { focus: 'series' }
+      },
+      {
+        type: 'line',
+        smooth: true,
+        seriesLayoutBy: 'row',
+        emphasis: { focus: 'series' }
+      },
+      {
+        type: 'line',
+        smooth: true,
+        seriesLayoutBy: 'row',
+        emphasis: { focus: 'series' }
+      },
+      {
+        type: 'pie',
+        id: 'pie',
+        radius: '30%',
+        center: ['50%', '25%'],
+        emphasis: {
+          focus: 'self'
+        },
+        label: {
+          formatter: '{b}: {@2012} ({d}%)'
+        },
+        encode: {
+          itemName: 'product',
+          value: '2012',
+          tooltip: '2012'
+        }
+      }
+    ]
+  };
+  myChart.on('updateAxisPointer', function (event) {
+    const xAxisInfo = event.axesInfo[0];
+    if (xAxisInfo) {
+      const dimension = xAxisInfo.value + 1;
+      myChart.setOption({
+        series: {
+          id: 'pie',
+          label: {
+            formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+          },
+          encode: {
+            value: dimension,
+            tooltip: dimension
+          }
+        }
+      });
+    }
+  });
+  myChart.setOption(option1);
+});
+
+option1 && myChart.setOption(option1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var chartDome = document.getElementById('main2');
+var myCharti = echarts.init(chartDome);
+var option;
+
+const builderJson = {
+  all: 42,
+  charts: {
+    France: 4.0, USA: 3.0, Yugoslavia: 4.0, Romania: 3.0, Argentina: 3.0, Chile: 1.0, Uruguay: 4.0, Brazil: 4.0,Paraguay: 1.0,
+    Hungary:6.0,Italy:9.0
+
+  },
+  components: {
+    Mexico: 3.0, Belgium: 0.0,Brazil: 1.0, Peru: 0.0, France: 0.0, Bolivia: 0.0, Paraguay: 0.0, Romania: 0.0, Chile: 1.0,Switzerland:1,
+    Brazil:3
+
+  },
+  ie: 9743
+};
+const downloadJson = {
+  'Italy': 9,
+  'Hungary': 6,
+  'Paraguay': 1,
+  'Brazil': 4,
+  'Uraguay':4,
+  'Chile':1,
+  'France': 4.0,
+   'USA': 3.0,
+    'Yugoslavia': 4.0,
+     'Romania': 3.0, 
+     'Argentina': 3.0
+};
+const themeJson = {
+  'Mexico': 3.0, 'Belgium': 0.0, 'Brazil': 1.0, 'Peru': 0.0, 'France': 0.0, 'Bolivia': 0.0, 'Paraguay': 0.0, 'Romania': 0.0, 'Chile': 1.0,
+  'Brazil':3,'Switzerland':1
+
+};
+const waterMarkText = 'ECHARTS';
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = canvas.height = 100;
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+ctx.globalAlpha = 0.08;
+ctx.font = '20px Microsoft Yahei';
+ctx.translate(50, 50);
+ctx.rotate(-Math.PI / 4);
+ctx.fillText(waterMarkText, 0, 0);
+option = {
+  backgroundColor: {
+    type: 'pattern',
+    image: canvas,
+    repeat: 'repeat'
+  },
+  tooltip: {},
+  title: [
+    {
+      text: 'Home and Away Teams and There Goals',
+      subtext: 'Total ' + builderJson.all,
+      left: '25%',
+      textAlign: 'center'
+    },
+    
+
+  
+
+
+
+    {
+      text: 'Home Teams',
+      subtext:
+        'Total ' +
+        Object.keys(downloadJson).reduce(function (all, key) {
+          return all + downloadJson[key];
+        }, 0),
+      left: '75%',
+      textAlign: 'center'
+    },
+    {
+      text: 'Away Teams',
+      subtext:
+        'Total ' +
+        Object.keys(themeJson).reduce(function (all, key) {
+          return all + themeJson[key];
+        }, 0),
+      left: '75%',
+      top: '50%',
+      textAlign: 'center'
+    }
+  ],
+  grid: [
+    {
+      top: 50,
+      width: '50%',
+      bottom: '45%',
+      left: 10,
+      containLabel: true
+    },
+    {
+      top: '55%',
+      width: '50%',
+      bottom: 0,
+      left: 10,
+      containLabel: true
+    }
+  ],
+  xAxis: [
+    {
+      type: 'value',
+      max: builderJson.all,
+      splitLine: {
+        show: false
+      }
+    },
+    {
+      type: 'value',
+      max: builderJson.all,
+      gridIndex: 1,
+      splitLine: {
+        show: false
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: 'category',
+      data: Object.keys(builderJson.charts),
+      axisLabel: {
+        interval: 0,
+        rotate: 30
+      },
+      splitLine: {
+        show: false
+      }
+    },
+    {
+      gridIndex: 1,
+      type: 'category',
+      data: Object.keys(builderJson.components),
+      axisLabel: {
+        interval: 0,
+        rotate: 30
+      },
+      splitLine: {
+        show: false
+      }
+    }
+  ],
+  series: [
+    {
+      type: 'bar',
+      stack: 'chart',
+      z: 3,
+      label: {
+        position: 'right',
+        show: true
+      },
+      data: Object.keys(builderJson.charts).map(function (key) {
+        return builderJson.charts[key];
+      })
+    },
+    {
+      type: 'bar',
+      stack: 'chart',
+      silent: true,
+      itemStyle: {
+        color: '#eee'
+      },
+      data: Object.keys(builderJson.charts).map(function (key) {
+        return builderJson.all - builderJson.charts[key];
+      })
+    },
+    {
+      type: 'bar',
+      stack: 'component',
+      xAxisIndex: 1,
+      yAxisIndex: 1,
+      z: 3,
+      label: {
+        position: 'right',
+        show: true
+      },
+      data: Object.keys(builderJson.components).map(function (key) {
+        return builderJson.components[key];
+      })
+    },
+    {
+      type: 'bar',
+      stack: 'component',
+      silent: true,
+      xAxisIndex: 1,
+      yAxisIndex: 1,
+      itemStyle: {
+        color: '#eee'
+      },
+      data: Object.keys(builderJson.components).map(function (key) {
+        return builderJson.all - builderJson.components[key];
+      })
+    },
+    {
+      type: 'pie',
+      radius: [0, '30%'],
+      center: ['75%', '25%'],
+      data: Object.keys(downloadJson).map(function (key) {
+        return {
+          name: key.replace('.js', ''),
+          value: downloadJson[key]
+        };
+      })
+    },
+    {
+      type: 'pie',
+      radius: [0, '30%'],
+      center: ['75%', '75%'],
+      data: Object.keys(themeJson).map(function (key) {
+        return {
+          name: key.replace('.js', ''),
+          value: themeJson[key]
+        };
+      })
+    }
+  ]
+};
+
+option && myCharti.setOption(option);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </script>
+</body>
+</html>
